@@ -4,6 +4,8 @@
 [![License: AGPLv3][license_badge]][license_link]
 [![app](https://github.com/broxus/fancy_logger/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/fancy_logger/actions/workflows/main.yaml)
 
+The Logging Library for Flutter with SQLite Integration is a powerful and easy-to-use logging solution for Flutter applications. It provides a seamless way to log events, errors, and debug information in your Flutter projects while storing the logs in a SQLite database. Additionally, the library offers the capability to export logs in JSON format.
+
 ## Installation 💻
 
 **❗ In order to start using Fancy Logger you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
