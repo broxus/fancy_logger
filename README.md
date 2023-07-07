@@ -4,24 +4,111 @@
 [![License: AGPLv3][license_badge]][license_link]
 [![app](https://github.com/broxus/fancy_logger/actions/workflows/main.yaml/badge.svg)](https://github.com/broxus/fancy_logger/actions/workflows/main.yaml)
 
+The Logging Library for Flutter with SQLite Integration is a powerful and easy-to-use logging solution for Flutter applications. It provides a seamless way to log events, errors, and debug information in your Flutter projects while storing the logs in a SQLite database. Additionally, the library offers the capability to export logs in JSON format.
+
 ## Installation 💻
 
 **❗ In order to start using Fancy Logger you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
 
-Add `fancy_logger` to your `pubspec.yaml`:
+Add [fancy_logger][pubdev_link] to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   fancy_logger:
 ```
 
-Install it:
+## Basic usage 🛠
 
-```sh
-flutter packages get
+Setup DI:
+
+```dart
+@InjectableInit(  
+  externalPackageModulesBefore: [
+    ExternalModule(FancyLoggerPackageModule),
+  ],
+)  
+void configureDependencies() => getIt.init();  
 ```
 
----
+Init:
+
+```dart
+Future<void> configureLogger() async {
+  final fancyLogger = inject<FancyLogger>();
+  await fancyLogger.init({Level.ALL: 100});
+}
+```
+
+## Melos magic 🪄
+
+Using [melos](https://melos.invertase.dev/) makes it very easy to work with the project, so enjoy.
+
+You can run any job interactively run running `melos run` and selecting needed case or directly (e.g. `melos run test`).
+
+### Bootstrap 🏁
+
+Melos takes care about dependencies of all packages, including managing of local-generated library version. So, just run:
+
+```
+melos bs
+```
+
+### Codegen 🦾
+
+This thing will run all code generators for all packages:
+
+```
+$ melos run codegen
+```
+
+### Clean up 🧹
+
+Just run commands below to clean all, including build directories and flutter projects.
+
+```
+melos clean
+```
+
+### Tests ✔️
+
+You can run all tests at one by running this command.
+
+```
+melos run test
+```
+
+### Code 📊
+
+You can run code analysis:
+
+```
+melos run analyze
+```
+
+### Code format 🗃️
+
+`melos run check-format` will check, `melos run format` will fix dart code formatting.
+
+```
+melos run check-format
+melos run format
+```
+
+### Prepare to commit 🤝🏻
+
+`melos run check-all` will ckeck, analyze and run all tests.
+
+```
+melos run check-all
+```
+
+## Conventional Commits ❤️
+
+[This magic](https://melos.invertase.dev/guides/automated-releases#versioning) will update version and build our library automatically using commit messages and tags. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) is a lightweight convention on top of commit messages.
+
+## Version 🏷️
+
+Package version control is done by melos. It runs by gh action 'Create version PR' ```melos version -a --yes```.
 
 ## Continuous Integration 🤖
 
@@ -29,31 +116,10 @@ Fancy Logger comes with a built-in [GitHub Actions workflow][github_actions_link
 
 Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
 
----
+## Github Secrets 🔑
 
-## Running Tests 🧪
+`BOT_ACCESS_TOKEN`: Personal access token (PAT) used to fetch the repository. We should use PAT and not default GITHUB_TOKEN because ["When you use the repository's GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN, with the exception of workflow_dispatch and repository_dispatch, will not create a new workflow run"](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#triggering-a-workflow-from-a-workflow). We want to trigger a workflow from the workflow (to run tests), so we need to use PAT. This thing is used in `version` workflow.
 
-For first time users, install the [very_good_cli][very_good_cli_link]:
-
-```sh
-dart pub global activate very_good_cli
-```
-
-To run all unit tests:
-
-```sh
-very_good test --coverage
-```
-
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
-
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
-
-# Open Coverage Report
-open coverage/index.html
-```
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
@@ -64,3 +130,4 @@ open coverage/index.html
 [very_good_cli_link]: https://pub.dev/packages/very_good_cli
 [very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
 [very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
+[pubdev_link]: https://pub.dev/packages/fancy_logger
