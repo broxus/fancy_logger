@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-07-11
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`fancy_logger` - `v0.1.1-dev.0`](#fancy_logger---v011-dev0)
+
+---
+
+#### `fancy_logger` - `v0.1.1-dev.0`
+
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: use flutter templates repository (#5).
+
+## 0.1.1-dev.0
+
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: use flutter templates repository (#5).
+
+
 ## 2023-07-06
 
 ### Changes
