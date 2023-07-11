@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 melos clean
 melos bs
 melos run check-format --no-select
