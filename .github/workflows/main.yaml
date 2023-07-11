@@ -19,3 +19,5 @@ jobs:
 
   build_and_test:
     uses: broxus/flutter_templates/.github/workflows/run-melos.yaml@main
+    with:
+      runner: macos-latest
