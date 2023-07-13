@@ -11,6 +11,39 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`fancy_logger` - `v0.1.2`](#fancy_logger---v012)
+
+---
+
+#### `fancy_logger` - `v0.1.2`
+
+ - **REFACTOR**: session start extra (#9).
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: extra startSession() extra string support (#7).
+ - **FEAT**: use flutter templates repository (#5).
+
+## 0.1.2
+
+ - **REFACTOR**: session start extra (#9).
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: extra startSession() extra string support (#7).
+ - **FEAT**: use flutter templates repository (#5).
+
+
+## 2023-07-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - [`fancy_logger` - `v0.1.1`](#fancy_logger---v011)
 
 Packages with other changes:
