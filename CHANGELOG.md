@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-07-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`fancy_logger` - `v0.1.1`](#fancy_logger---v011)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+Packages graduated to a stable release (see pre-releases prior to the stable version for changelog entries):
+
+ - `fancy_logger` - `v0.1.1`
+
+---
+
+#### `fancy_logger` - `v0.1.1`
+
+## 0.1.1
+
+ - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
+
+
 ## 2023-07-11
 
 ### Changes
