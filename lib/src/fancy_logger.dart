@@ -106,7 +106,7 @@ class FancyLogger {
   }
 
   /// Increment session id
-  Future<void> startSession({String? extra}) async {
+  Future<void> startSession() async {
     final logStrings = <String>[];
     for (final logger in _loggers) {
       final logString = await logger.sessionStart();
