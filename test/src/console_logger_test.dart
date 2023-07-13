@@ -138,9 +138,10 @@ void main() {
       startNewSession: false,
       dbLogger: false,
       consoleLoggerCallback: consoleLoggerCallback,
+      sessionStartExtra: 'extra string',
     );
 
-    await fancyLogger.startSession(extra: 'extra string');
+    await fancyLogger.startSession();
 
     expect(logs, hasLength(1));
 

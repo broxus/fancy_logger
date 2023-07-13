@@ -110,10 +110,14 @@ void main() {
 
     test('add session with extra string', () async {
       final fancyLogger = FancyLogger();
-      await fancyLogger.init({Level.ALL: 100}, startNewSession: false);
+      await fancyLogger.init(
+        {Level.ALL: 100},
+        startNewSession: false,
+        sessionStartExtra: 'extra string',
+      );
       await fancyLogger.clearAllLogs();
 
-      await fancyLogger.startSession(extra: 'extra string');
+      await fancyLogger.startSession();
 
       final logs = await fancyLogger.getAllLogsAsMaps();
 
