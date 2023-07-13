@@ -19,6 +19,7 @@ class FancyLogger {
   final _log = Logger('FancyLogger');
   late List<AbstractLogger> _loggers = [];
   Level _minLevel = Level.ALL;
+  String? _sessionStartExtra;
 
   /// Init app logger
   /// [retainStrategy] processing algorythm:
@@ -55,13 +56,22 @@ class FancyLogger {
   ///                         // (i.e. you will be able to retrieve the logs from the
   ///                         // previous run)
   /// }
+  /// [startNewSession] - if true, new session will be started
+  /// [consoleLogger] - if true, console logger will be used
+  /// [dbLogger] - if true, db logger will be used
+  /// [consoleLoggerCallback] - callback for console logger
+  /// [sessionStartExtra] - extra info for session start, will be added to all
+  /// session start records
   Future<void> init(
     Map<Level, int> retainStrategy, {
     bool startNewSession = true,
     bool consoleLogger = true,
     bool dbLogger = true,
     ConsoleLoggerCallback? consoleLoggerCallback,
+    String? sessionStartExtra,
   }) async {
+    _sessionStartExtra = sessionStartExtra;
+
     // If there are no explicit instructions on how to retain logs
     final retainStrategyNotEmpty =
         retainStrategy.isEmpty ? {Level.ALL: 100} : retainStrategy;
@@ -96,7 +106,7 @@ class FancyLogger {
   }
 
   /// Increment session id
-  Future<void> startSession({String? extra}) async {
+  Future<void> startSession() async {
     final logStrings = <String>[];
     for (final logger in _loggers) {
       final logString = await logger.sessionStart();
@@ -110,7 +120,8 @@ class FancyLogger {
       (value, element) => value = '$value$element',
     );
 
-    final extraString = extra == null ? '' : ' $extra';
+    final extraString =
+        _sessionStartExtra == null ? '' : ' $_sessionStartExtra';
     _log.fine('Session start $logStringsReduced$extraString');
   }
 
