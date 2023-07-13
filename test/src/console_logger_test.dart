@@ -109,4 +109,43 @@ void main() {
     expect(logs[8]['name'], contains('TestLogger'));
     expect(logs[8]['level'], Level.SHOUT.value);
   });
+
+  test('FancyLogger console startSession extra string test', () async {
+    final logs = <Map<String, dynamic>>[];
+
+    void consoleLoggerCallback(
+      String message, {
+      DateTime? time,
+      int? sequenceNumber,
+      int level = 0,
+      String name = '',
+      Zone? zone,
+      Object? error,
+      StackTrace? stackTrace,
+    }) {
+      if (!message.contains('hot-reload')) {
+        logs.add({
+          'message': message,
+          'level': level,
+          'name': name,
+        });
+      }
+    }
+
+    final fancyLogger = FancyLogger();
+    await fancyLogger.init(
+      {},
+      startNewSession: false,
+      dbLogger: false,
+      consoleLoggerCallback: consoleLoggerCallback,
+    );
+
+    await fancyLogger.startSession(extra: 'extra string');
+
+    expect(logs, hasLength(1));
+
+    expect(logs[0]['message'], contains('Session start'));
+    expect(logs[0]['message'], contains('extra string'));
+    expect(logs[0]['name'], contains('FancyLogger'));
+  });
 }

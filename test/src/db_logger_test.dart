@@ -108,6 +108,26 @@ void main() {
       expect(logs[8]['logger_name'], 'TestLogger');
     });
 
+    test('add session with extra string', () async {
+      final fancyLogger = FancyLogger();
+      await fancyLogger.init({Level.ALL: 100}, startNewSession: false);
+      await fancyLogger.clearAllLogs();
+
+      await fancyLogger.startSession(extra: 'extra string');
+
+      final logs = await fancyLogger.getAllLogsAsMaps();
+
+      expect(logs, hasLength(1));
+
+      final sessionId = logs[0]['session_id'];
+      expect(logs[0]['level'], Level.FINE.value);
+      expect(
+        logs[0]['message'],
+        'Session start new session id: $sessionId extra string',
+      );
+      expect(logs[0]['logger_name'], 'FancyLogger');
+    });
+
     test('test retain strategy', () async {
       final fancyLogger = FancyLogger();
       await fancyLogger.init(

@@ -96,7 +96,7 @@ class FancyLogger {
   }
 
   /// Increment session id
-  Future<void> startSession() async {
+  Future<void> startSession({String? extra}) async {
     final logStrings = <String>[];
     for (final logger in _loggers) {
       final logString = await logger.sessionStart();
@@ -109,7 +109,9 @@ class FancyLogger {
       '',
       (value, element) => value = '$value$element',
     );
-    _log.fine('Session start $logStringsReduced');
+
+    final extraString = extra == null ? '' : ' $extra';
+    _log.fine('Session start $logStringsReduced$extraString');
   }
 
   /// Get all logs as strings (for debug purposes only)
