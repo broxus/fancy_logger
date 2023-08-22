@@ -11,7 +11,7 @@ import 'package:fancy_logger/src/fancy_logger.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i1;
 
 class FancyLoggerPackageModule extends _i1.MicroPackageModule {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.singleton<_i3.FancyLogger>(_i3.FancyLogger());
