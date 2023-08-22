@@ -1,6 +1,6 @@
 name: fancy_logger
 description: The Logging Library for Flutter with SQLite Integration.
-version: 0.1.2
+version: 0.1.3
 repository: https://github.com/broxus/fancy_logger
 
 environment:
