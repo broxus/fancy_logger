@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-08-30
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`fancy_logger` - `v0.1.4`](#fancy_logger---v014)
+
+---
+
+#### `fancy_logger` - `v0.1.4`
+
+ - **REFACTOR**: session start extra (#9).
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: add error and stacktrace (#14).
+ - **FEAT**: extra startSession() extra string support (#7).
+ - **FEAT**: use flutter templates repository (#5).
+
+## 0.1.4
+
+ - **REFACTOR**: session start extra (#9).
+ - **FIX**: try fix test.
+ - **FIX**: test concurrency.
+ - **FEAT**: add error and stacktrace (#14).
+ - **FEAT**: extra startSession() extra string support (#7).
+ - **FEAT**: use flutter templates repository (#5).
+
+
 ## 2023-08-22
 
 ### Changes
