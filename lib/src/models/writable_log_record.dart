@@ -12,14 +12,13 @@ extension WritableLevel on Level {
 extension WritableLogRecord on LogRecord {
   /// Prepare structure for writing to db
   Map<String, dynamic> toMap({required int sessionId}) {
-    var trace = error?.toString();
-    trace = trace != null ? '\n$trace\n' : '';
-
     return {
       'session_id': sessionId,
       'level': level.value,
-      'message': '$message$trace',
+      'message': message,
       'logger_name': loggerName,
+      'error': error?.toString(),
+      'stack_trace': stackTrace.toString(),
       'time': time.microsecondsSinceEpoch,
     };
   }
@@ -30,6 +29,8 @@ extension WritableLogRecord on LogRecord {
       WritableLevel.fromValue(map['level'] as int),
       map['message'] as String,
       map['logger_name'] as String,
+      map['error'] as String,
+      StackTrace.fromString(map['stack_trace'] as String),
     );
   }
 }

@@ -149,4 +149,56 @@ void main() {
     expect(logs[0]['message'], contains('extra string'));
     expect(logs[0]['name'], contains('FancyLogger'));
   });
+
+  test('FancyLogger console startSession stack trace test', () async {
+    final logs = <Map<String, dynamic>>[];
+
+    void consoleLoggerCallback(
+      String message, {
+      DateTime? time,
+      int? sequenceNumber,
+      int level = 0,
+      String name = '',
+      Zone? zone,
+      Object? error,
+      StackTrace? stackTrace,
+    }) {
+      if (!message.contains('hot-reload')) {
+        logs.add(
+          {
+            'message': message,
+            'level': level,
+            'name': name,
+            'error': error,
+            'stackTrace': stackTrace,
+          },
+        );
+      }
+    }
+
+    final fancyLogger = FancyLogger();
+    await fancyLogger.init(
+      {},
+      startNewSession: false,
+      dbLogger: false,
+      consoleLoggerCallback: consoleLoggerCallback,
+      sessionStartExtra: 'extra string',
+    );
+
+    await fancyLogger.startSession();
+
+    try {
+      throw Exception('some exception');
+    } catch (e, s) {
+      log.severe(e, 'some error', s);
+    }
+
+    expect(logs, hasLength(2));
+    expect(logs[1]['message'], contains('some exception'));
+    expect(logs[1]['error'], contains('some error'));
+    expect(
+      logs[1]['stackTrace'].toString(),
+      contains('fancy_logger/test/src/console_logger_test'),
+    );
+  });
 }
