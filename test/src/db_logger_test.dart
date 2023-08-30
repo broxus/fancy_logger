@@ -132,6 +132,35 @@ void main() {
       expect(logs[0]['logger_name'], 'FancyLogger');
     });
 
+    test('add session with stack trace', () async {
+      final fancyLogger = FancyLogger();
+      await fancyLogger.init(
+        {Level.ALL: 100},
+        startNewSession: false,
+        sessionStartExtra: 'extra string',
+      );
+      await fancyLogger.clearAllLogs();
+
+      await fancyLogger.startSession();
+
+      try {
+        throw Exception('some exception');
+      } catch (e, s) {
+        log.severe(e, 'some error', s);
+      }
+
+      final logs = await fancyLogger.getAllLogsAsMaps();
+
+      expect(logs, hasLength(2));
+
+      expect(logs[1]['message'], contains('some exception'));
+      expect(logs[1]['error'], contains('some error'));
+      expect(
+        logs[1]['stack_trace'].toString(),
+        contains('fancy_logger/test/src/db_logger_test'),
+      );
+    });
+
     test('test retain strategy', () async {
       final fancyLogger = FancyLogger();
       await fancyLogger.init(
@@ -216,7 +245,11 @@ void main() {
             ..info('some info log')
             ..warning('some warning log')
             ..severe('some severe log')
-            ..shout('some shout log');
+            ..shout(
+              'some shout log',
+              'some shout error',
+              StackTrace.fromString('some shout stacktrace'),
+            );
         }
       }
 
@@ -304,6 +337,8 @@ void main() {
           expect(logShout['session_id'], sessionId);
           expect(logShout['level'], Level.SHOUT.value);
           expect(logShout['message'], 'some shout log');
+          expect(logShout['error'], 'some shout error');
+          expect(logShout['stack_trace'], 'some shout stacktrace');
           expect(logShout['id'], id++);
         }
       }

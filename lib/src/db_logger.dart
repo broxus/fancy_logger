@@ -52,6 +52,8 @@ class DbLogger extends AbstractLogger {
           level INTEGER,
           message TEXT,
           logger_name TEXT,
+          error TEXT,
+          stack_trace TEXT,
           time TIMESTAMP
         );
       ''',
@@ -131,6 +133,8 @@ class DbLogger extends AbstractLogger {
           session_id,
           level,
           message,
+          error,
+          stack_trace,
           time
         FROM records ORDER BY record_timestamp ASC
       ''',

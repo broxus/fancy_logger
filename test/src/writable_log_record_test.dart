@@ -7,13 +7,20 @@ import 'package:logging/logging.dart';
 void main() {
   group('WritableLogRecord extension for LogRecord', () {
     test('to map', () {
-      final map =
-          LogRecord(Level.CONFIG, 'msg12', 'logger34').toMap(sessionId: 42);
+      final map = LogRecord(
+        Level.CONFIG,
+        'msg12',
+        'logger34',
+        'some error',
+        StackTrace.fromString('some stacktrace'),
+      ).toMap(sessionId: 42);
       expect(map, {
         'session_id': 42,
         'level': Level.CONFIG.value,
         'message': 'msg12',
         'logger_name': 'logger34',
+        'error': 'some error',
+        'stack_trace': 'some stacktrace',
         'time': map['time'], // can't check it really
       });
     });
@@ -23,6 +30,8 @@ void main() {
         'session_id': 42,
         'level': Level.CONFIG.value,
         'message': 'msg12',
+        'error': 'some error',
+        'stack_trace': 'some stacktrace',
         'logger_name': 'logger34',
       };
 
